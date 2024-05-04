@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block sidenav %}
+    {% for item in item_list %}
+    <li class="nav-item">
+        <a class="nav-link btn btn-outline-secondary" href="{{ item.link }}">{{ item.item }}</a>
+    </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<h1 class="text-center mt-5 animated-title">About Us</h1>
+<p>
+    Our Website is designed to help keep track of your books. You can post a book, search for a book, and even display all books in your collection.
+    With our website you can organize the books you've read. Just simply upload a book in our
+    <a href="/postbook">Post Book</a> menu. Then it will be able to be displayed in our
+    <a href="/displaybooks">Display Books</a> menu.
+    <div style="text-align:center">Enjoy organizing your books!
+    </div>
+</p>
+<p> This Project was done by Group 2. The Group Members are:</p>
+<li>
+    Christian Perez
+</li>
+<li>
+    Harshaun Khehra
+</li>
+<li>
+    Jael Estrada
+</li>
+<li>
+    Lair Noriega
+</li>
+<li>
+    Lea Lang
+</li>
+<li>
+    Sophia Liwag
+</li>
+{% endblock content %}

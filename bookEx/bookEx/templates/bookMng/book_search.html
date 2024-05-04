@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+    {% for item in item_list %}
+        <li class="nav-item">
+            <a class="nav-link btn btn-outline-secondary" href="{{ item.link }}">{{ item.item }}</a>
+        </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<style>
+    .book-button {
+        padding: 10px 20px; /* Adjust padding as needed */
+        margin: 10px;
+        border: 1px solid #ced4da; /* Border color */
+        border-radius: 5px;
+        transition: transform 0.3s ease; /* Smooth transition for the pop-up effect */
+        display: block; /* Display buttons stacked vertically */
+    }
+
+    .book-button:hover {
+        transform: translateY(-5px); /* Pop-up effect on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    }
+</style>
+
+<div class="container">
+
+    {% if books %}
+        <h1 class="text-center mt-5 animated-title">Search Results</h1>
+        <div class="mt-4">
+            {% for book in books %}
+            <a href="{% url 'book_detail' book.id %}" class="btn btn-primary book-button">{{ book.name }}</a>
+            {% endfor %}
+        </div>
+    {% else %}
+        {% if query %}
+            <p class="mt-4">No books found matching "{{ query }}".</p>
+        {% endif %}
+    {% endif %}
+</div>
+{% endblock %}
+
+
+
+

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block sidenav %}
+    {% for item in item_list %}
+    <li class="nav-item">
+        <a class="nav-link btn btn-outline-secondary" href="{{ item.link }}">{{ item.item }}</a> <!-- Added btn class for button appearance -->
+    </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+    <h1 align="center"> Book Deleted Successfully!</h1>
+{% endblock content %}

@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block sidenav %}
+    {% for item in item_list %}
+    <li class="nav-item">
+        <a class="nav-link btn btn-outline-secondary" href="{{ item.link }}">{{ item.item }}</a>
+    </li>
+    {% endfor %}
+{% endblock sidenav %}
+
+{% block content %}
+<style>
+    #rating button {
+        display: inline-block;
+        padding: 5px;
+        border: none;
+        background-color: transparent;
+        color: #007bff;
+        font-size: 24px; /* Adjust font size as needed */
+    }
+
+    #rating button:hover {
+        cursor: pointer;
+        color: gold;
+    }
+
+    #rating p {
+        display: inline-block;
+        margin: auto;
+        padding: 200px;
+        color: #007bff;
+        font-size: 16px; /* Adjust font size as needed */
+    }
+
+    #rating .yellow {
+        color: yellow;
+    }
+
+    #custom-table-width {
+        width: 100%; /* Adjust the width as needed */
+    }
+</style>
+
+<div class="container">
+    <h1 class="text-center mt-5 animated-title">Book Detail</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <img src="{% static book.pic_path %}" class="img-fluid mt-4" alt="{{ book.name }}">
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-10">
+            <table id="custom-table-width" class="table table-bordered text-center ">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Book Name</th>
+                        <th>Price</th>
+                        <th>User</th>
+                        <th>Publish Date</th>
+                        <th>Comments</th>
+                        <th>Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ book.name }}</td>
+                        <td>{{ book.price }}</td>
+                        <td>{{ book.username }}</td>
+                        <td>{{ book.publishdate }}</td>
+                        <td><a href="{% url 'book_comments' book.id %}" class="btn btn-primary">View Comments</a></td>
+                        <td>
+                            <form action="{% url 'save_rating' book.id %}" method="POST">
+                                {% csrf_token %}
+                                <div id="rating" class="text-center ">
+                                    <button type="submit" id="star1" name="rating" value="1">1&#9733;</button>
+                                    <button type="submit" id="star2" name="rating" value="2">2&#9733;</button>
+                                    <button type="submit" id="star3" name="rating" value="3">3&#9733;</button>
+                                    <button type="submit" id="star4" name="rating" value="4">4&#9733;</button>
+                                    <button type="submit" id="star5" name="rating" value="5">5&#9733;</button>
+                                </div>
+                                <input type="hidden" name="book_id" value="{{ book.id }}">
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-20 text-center">
+            {% if user_rating %}
+                <p>You Rated This Book:
+                    {% for star in stars %}
+                        <span class="yellow">&#9733;</span>
+                    {% endfor %}
+                </p>
+            {% else %}
+                <p>Rate this book:</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container" style="background: &#9602;">
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3 text-center">
+      <h1 class="text-center mt-5 animated-title">Book Exchange System</h1>
+      <div class="center" class="text-end">
+        <a href="{% url 'login' %}?next=/home" class="btn btn-primary me-2">Login</a>
+        <a href="{% url 'register' %}" class="btn btn-secondary">Register</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
